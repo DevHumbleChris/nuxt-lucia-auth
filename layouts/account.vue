@@ -2,6 +2,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import AccountHeader from "~/components/account/AccountHeader.vue";
 import Sidebar from "~/components/account/Sidebar.vue";
+import ModalProvider from "~/providers/ModalProvider.vue";
 
 useHead({
   meta: [
@@ -47,5 +48,6 @@ defineOgImageComponent("NuxtSeo", {
       </div>
     </div>
     <Toaster :close-button="true" />
+    <ModalProvider />
   </main>
 </template>

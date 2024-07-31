@@ -16,6 +16,7 @@
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/google-fonts": "^3.2.0",
     "@nuxtjs/svg-sprite": "^1.0.2",
+    "@pinia/nuxt": "^0.5.2",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
@@ -28,6 +29,7 @@
     "nuxt": "^3.12.4",
     "nuxt-og-image": "^3.0.0-rc.64",
     "oslo": "^1.2.1",
+    "pinia": "^2.2.0",
     "postgres": "^3.4.4",
     "radix-vue": "^1.9.2",
     "shadcn-nuxt": "^0.10.4",
@@ -48,6 +50,7 @@
     "@iconify-json/vscode-icons": "^1.1.36",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "@types/nodemailer": "^6.4.15",
     "drizzle-kit": "^0.23.1",
     "typescript": "^5.5.4"

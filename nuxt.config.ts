@@ -10,7 +10,9 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxtjs/color-mode",
     "@nuxtjs/svg-sprite",
-    "nuxt-og-image"
+    "nuxt-og-image",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
   ],
   shadcn: {
     /**
@@ -48,5 +50,13 @@ export default defineNuxtConfig({
   site: {
     // production URL
     url: process.env.BASE_URL,
+  },
+  pinia: {
+    storesDirs: ["./stores/**"],
+  },
+  piniaPersistedstate: {
+    cookieOptions: {
+      sameSite: "strict",
+    },
   },
 });

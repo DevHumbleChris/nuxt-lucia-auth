@@ -72,3 +72,10 @@ export const verifySchema = toTypedSchema(
     }),
   })
 );
+
+export interface ModalStore {
+  type: ModalType | null;
+  isOpen: boolean;
+}
+
+export type ModalType = "signoutUser";
