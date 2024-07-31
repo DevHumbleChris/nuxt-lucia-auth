@@ -31,7 +31,7 @@ const onSignout = async () => {
       method: "POST",
     });
 
-    const data = await useRequestFetch()("/api/user");
+    const data = await useRequestFetch()("/api/auth/user");
 
     if (!data) {
       globalUser.value = null;
@@ -43,10 +43,9 @@ const onSignout = async () => {
           border: 0,
         },
       });
-      return await navigateTo("/signin");
+      return await navigateTo("/auth/signin");
     }
   } catch (error: any) {
-    console.log(error.response);
     const errorMessage = error.response
       ? error.response._data.message
       : error.message;

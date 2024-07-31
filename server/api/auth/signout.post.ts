@@ -2,13 +2,13 @@ import { lucia } from "../../utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
-    if (!event.context.session) {
+    if (!event.context.user?.id) {
       throw createError({
         statusCode: 403,
       });
     }
 
-    await lucia.invalidateSession(event.context.session.id);
+    await lucia.invalidateSession(event.context.user?.id);
     appendHeader(
       event,
       "Set-Cookie",
