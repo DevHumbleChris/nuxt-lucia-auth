@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import UserSignout from "~/components/account/modals/UserSignout.vue";
+</script>
 
 <template>
-  <div></div>
+  <div>
+    <UserSignout />
+  </div>
 </template>

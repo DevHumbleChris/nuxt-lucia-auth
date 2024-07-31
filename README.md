@@ -53,7 +53,7 @@ GMAIL_EMAIL_PASSWORD = **********
 
 ## Roadmap
 
-- [ ] Email/password auth with verification.
+- [x] Email/password auth with verification.
 - [ ] Sign in with OAuth providers (GitHub/Google).
 - [ ] Sign in using Magic link.
 - [ ] Role-Based Access Policy (under consideration)

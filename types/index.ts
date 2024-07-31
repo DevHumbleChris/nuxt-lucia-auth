@@ -54,13 +54,32 @@ export const githubUrl =
   "https://github.com/DevHumbleChris/nuxt-lucia-auth.git";
 export const twitterUrl = "https://x.com/AmChrisKE";
 
-export const signupSchema = toTypedSchema(
+export const authSchema = toTypedSchema(
   z.object({
     email: z.string().email({
       message: "Invalid email!",
     }),
     password: z.string().min(8, {
       message: "Password must be atleast 8 characters long!",
+    }),
+  })
+);
+
+export const resetPasswordCodeSchema = toTypedSchema(
+  z.object({
+    email: z.string().email({
+      message: "Invalid email!",
+    }),
+  })
+);
+
+export const resetPasswordSchema = toTypedSchema(
+  z.object({
+    password: z.string().min(8, {
+      message: "Password must be atleast 8 characters long!",
+    }),
+    code: z.string().min(8, {
+      message: "Code must be atleast 8 characters long!",
     }),
   })
 );

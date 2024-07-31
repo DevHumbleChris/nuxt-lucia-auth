@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PasswordInput from "~/components/PasswordInput.vue";
+import SigninForm from "~/components/auth/signin/SigninForm.vue";
 
 definePageMeta({
   layout: "auth",
@@ -21,11 +20,12 @@ useHead({
 const user = useUser();
 
 onBeforeMount(async () => {
-  if (!user.value?.isEmailVerified) {
-    return await navigateTo("/auth/verify-email");
+  if (user.value) {
+    if (!user.value?.isEmailVerified) {
+      return await navigateTo("/auth/verify-email");
+    }
+    await navigateTo("/dashboard");
   }
-
-  await navigateTo("/dashboard");
 });
 </script>
 
@@ -38,17 +38,17 @@ onBeforeMount(async () => {
       >
     </CardHeader>
     <CardContent>
-      <div class="grid gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Button variant="outline" class="w-full" asChild>
           <NuxtLink to="/login/discord">
             <Icon name="tabler:brand-google" class="mr-2 size-5" />
-            Log in with Google
+            Sign up with Google
           </NuxtLink>
         </Button>
         <Button variant="outline" class="w-full" asChild>
           <NuxtLink to="/login/discord">
             <Icon name="tabler:brand-github" class="mr-2 size-5" />
-            Log in with Github
+            Sign up with Github
           </NuxtLink>
         </Button>
       </div>
@@ -57,44 +57,7 @@ onBeforeMount(async () => {
         <div class="mx-2 text-muted-foreground">or</div>
         <div class="flex-grow border-t border-muted" />
       </div>
-      <form class="grid gap-4">
-        <div class="space-y-2">
-          <Label for="email">Email</Label>
-          <Input
-            required
-            id="email"
-            placeholder="email@example.com"
-            autoComplete="email"
-            name="email"
-            type="email"
-          />
-        </div>
-
-        <div class="space-y-2">
-          <Label for="password">Password</Label>
-          <!-- <PasswordInput
-            id="password"
-            name="password"
-            required
-            autoComplete="current-password"
-            placeholder="********"
-            :disabled="false"
-          /> -->
-        </div>
-
-        <div class="flex flex-wrap justify-between">
-          <Button variant="link" size="sm" class="p-0">
-            <NuxtLink to="/auth/signup">Not signed up? Sign up now.</NuxtLink>
-          </Button>
-          <Button variant="link" size="sm" class="p-0">
-            <NuxtLink to="/auth/reset-password">Forgot password?</NuxtLink>
-          </Button>
-        </div>
-        <Button class="w-full" aria-label="submit-btn"> Signin </Button>
-        <Button variant="outline" class="w-full" asChild>
-          <NuxtLink to="/">Cancel</NuxtLink>
-        </Button>
-      </form>
+      <SigninForm />
     </CardContent>
   </Card>
 </template>

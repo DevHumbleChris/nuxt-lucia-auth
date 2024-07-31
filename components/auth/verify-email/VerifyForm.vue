@@ -47,6 +47,8 @@ const onVerifyCode = form.handleSubmit(async (values) => {
         border: 0,
       },
     });
+
+    await navigateTo("/dashboard");
   } catch (error: any) {
     const errorMessage = error.response
       ? error.response._data.statusMessage

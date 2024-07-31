@@ -34,6 +34,24 @@ export const emailVerificationTable = pgTable(
   })
 );
 
+export const passwordResetTable = pgTable(
+  "password_reset",
+  {
+    id: text("id").primaryKey(),
+    userId: text("userId")
+      .notNull()
+      .references(() => userTable.id),
+    code: text("code").notNull(),
+    expiresAt: timestamp("expires_at", {
+      withTimezone: true,
+      mode: "date",
+    }).notNull(),
+  },
+  (table) => ({
+    index: [table.userId, table.code],
+  })
+);
+
 export const sessionTable = pgTable(
   "session",
   {

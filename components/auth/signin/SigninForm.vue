@@ -17,7 +17,7 @@ const form = useForm({
   validationSchema: authSchema,
 });
 
-const isSigningUp = ref(false);
+const isSigningIn = ref(false);
 
 const isSubmitting = computed(() => {
   return form.isSubmitting;
@@ -25,9 +25,9 @@ const isSubmitting = computed(() => {
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
-    isSigningUp.value = true;
+    isSigningIn.value = true;
 
-    const res = await $fetch("/api/auth/signup", {
+    const res = await $fetch("/api/auth/signin", {
       method: "POST",
       body: {
         email: values.email,
@@ -60,7 +60,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       },
     });
   } finally {
-    isSigningUp.value = false;
+    isSigningIn.value = false;
   }
 });
 </script>
@@ -94,22 +94,23 @@ const onSubmit = form.handleSubmit(async (values) => {
       </FormItem>
     </FormField>
     <div class="flex flex-wrap justify-between">
-      <Button type="button" variant="link" size="sm" class="p-0">
-        <NuxtLink to="/auth/signin"
-          >Already signed up? Signin instead.</NuxtLink
-        >
+      <Button variant="link" size="sm" class="p-0">
+        <NuxtLink to="/auth/signup">Not signed up? Sign up now.</NuxtLink>
+      </Button>
+      <Button variant="link" size="sm" class="p-0">
+        <NuxtLink to="/auth/reset-password">Forgot password?</NuxtLink>
       </Button>
     </div>
     <Button
-      :disabled="isSigningUp"
+      :disabled="isSigningIn"
       type="submit"
       class="w-full"
       aria-label="submit-btn"
     >
-      <Loader v-if="isSigningUp" class="animate-spin size-4" />
-      <span v-else>Signup</span>
+      <Loader v-if="isSigningIn" class="animate-spin size-4" />
+      <span v-else>Signin</span>
     </Button>
-    <Button type="button" variant="outline" class="w-full" asChild>
+    <Button variant="outline" class="w-full" asChild>
       <NuxtLink to="/">Cancel</NuxtLink>
     </Button>
   </form>

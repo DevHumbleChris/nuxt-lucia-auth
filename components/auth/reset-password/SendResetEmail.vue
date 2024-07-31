@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import PasswordInput from "~/components/PasswordInput.vue";
-import { authSchema } from "~/types";
+import { Input } from "~/components/ui/input";
+import { resetPasswordCodeSchema } from "~/types";
 import { Loader, ShieldX } from "lucide-vue-next";
 import { toast } from "vue-sonner";
 import { useForm } from "vee-validate";
@@ -13,28 +13,33 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+const props = defineProps<{
+  setIsResetPassword: (payload: boolean) => void;
+  setEmail: (payload: string) => void;
+}>();
+
 const form = useForm({
-  validationSchema: authSchema,
+  validationSchema: resetPasswordCodeSchema,
 });
 
-const isSigningUp = ref(false);
+const isSendingCode = ref(false);
 
 const isSubmitting = computed(() => {
   return form.isSubmitting;
 });
 
-const onSubmit = form.handleSubmit(async (values) => {
+const onSendPasswordCode = form.handleSubmit(async (values) => {
   try {
-    isSigningUp.value = true;
+    isSendingCode.value = true;
 
-    const res = await $fetch("/api/auth/signup", {
+    const res = await $fetch("/api/auth/send-reset-password-code", {
       method: "POST",
       body: {
         email: values.email,
-        password: values.password,
       },
     });
 
+    props?.setEmail(values.email);
     form.handleReset();
 
     toast.success(res.message, {
@@ -45,7 +50,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       },
     });
 
-    await navigateTo("/auth/verify-email");
+    props?.setIsResetPassword(true);
   } catch (error: any) {
     const errorMessage = error.response
       ? error.response._data.message
@@ -60,13 +65,13 @@ const onSubmit = form.handleSubmit(async (values) => {
       },
     });
   } finally {
-    isSigningUp.value = false;
+    isSendingCode.value = false;
   }
 });
 </script>
 
 <template>
-  <form @submit="onSubmit" class="grid gap-4">
+  <form @submit="onSendPasswordCode" class="space-y-4">
     <FormField v-slot="{ componentField }" name="email">
       <FormItem>
         <FormLabel class="text-base">Email *</FormLabel>
@@ -81,35 +86,25 @@ const onSubmit = form.handleSubmit(async (values) => {
         <FormMessage class="text-xs" />
       </FormItem>
     </FormField>
-    <FormField v-slot="{ componentField }" name="password">
-      <FormItem>
-        <FormLabel class="text-base">Password *</FormLabel>
-        <FormControl>
-          <PasswordInput
-            :disabled="isSubmitting.value"
-            :componentField="componentField"
-          />
-        </FormControl>
-        <FormMessage class="text-xs" />
-      </FormItem>
-    </FormField>
+
     <div class="flex flex-wrap justify-between">
-      <Button type="button" variant="link" size="sm" class="p-0">
-        <NuxtLink to="/auth/signin"
-          >Already signed up? Signin instead.</NuxtLink
-        >
-      </Button>
+      <NuxtLink to="/auth/signup">
+        <Button type="button" variant="link" size="sm" class="p-0">
+          Not signed up? Sign up now
+        </Button>
+      </NuxtLink>
     </div>
+
     <Button
-      :disabled="isSigningUp"
+      :disabled="isSendingCode"
       type="submit"
       class="w-full"
       aria-label="submit-btn"
     >
-      <Loader v-if="isSigningUp" class="animate-spin size-4" />
-      <span v-else>Signup</span>
+      <Loader v-if="isSendingCode" class="animate-spin size-4" />
+      <span v-else>Send Code</span>
     </Button>
-    <Button type="button" variant="outline" class="w-full" asChild>
+    <Button :disabled="isSendingCode" variant="outline" class="w-full" asChild>
       <NuxtLink to="/">Cancel</NuxtLink>
     </Button>
   </form>

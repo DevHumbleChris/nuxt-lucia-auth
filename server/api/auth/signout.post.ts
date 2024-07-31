@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
         statusCode: 403,
       });
     }
+
     await lucia.invalidateSession(event.context.session.id);
     appendHeader(
       event,

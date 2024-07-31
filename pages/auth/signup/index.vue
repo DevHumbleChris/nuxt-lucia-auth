@@ -20,10 +20,12 @@ useHead({
 const user = useUser();
 
 onBeforeMount(async () => {
-  if (!user.value?.isEmailVerified) {
-    return await navigateTo("/auth/verify-email");
+  if (user.value) {
+    if (!user.value?.isEmailVerified) {
+      return await navigateTo("/auth/verify-email");
+    }
+    await navigateTo("/dashboard");
   }
-  await navigateTo("/dashboard");
 });
 </script>
 

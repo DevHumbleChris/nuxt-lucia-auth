@@ -8,6 +8,13 @@
       "when": 1722403286204,
       "tag": "0000_futuristic_white_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1722429038951,
+      "tag": "0001_harsh_cannonball",
+      "breakpoints": true
     }
   ]
 }
