@@ -13,6 +13,16 @@ import PasswordInput from "~/components/PasswordInput.vue";
 definePageMeta({
   layout: "auth",
 });
+
+const user = useUser();
+
+onBeforeMount(async () => {
+  if (!user.value?.isEmailVerified) {
+    return await navigateTo("/auth/verify-email");
+  }
+
+  await navigateTo("/dashboard");
+});
 </script>
 
 <template>
@@ -58,14 +68,14 @@ definePageMeta({
 
         <div class="space-y-2">
           <Label for="password">Password</Label>
-          <PasswordInput
+          <!-- <PasswordInput
             id="password"
             name="password"
             required
             autoComplete="current-password"
             placeholder="********"
             :disabled="false"
-          />
+          /> -->
         </div>
 
         <div class="flex flex-wrap justify-between">

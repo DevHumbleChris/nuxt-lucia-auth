@@ -40,6 +40,7 @@
   "devDependencies": {
     "@iconify-json/devicon-plain": "^1.1.46",
     "@iconify-json/icon-park-outline": "^1.1.15",
+    "@iconify-json/lucide": "^1.1.203",
     "@iconify-json/simple-icons": "^1.1.111",
     "@iconify-json/tabler": "^1.1.118",
     "@iconify-json/vscode-icons": "^1.1.36",

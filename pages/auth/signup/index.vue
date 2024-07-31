@@ -12,6 +12,15 @@ import SignupForm from "~/components/auth/signup/SignupForm.vue";
 definePageMeta({
   layout: "auth",
 });
+
+const user = useUser();
+
+onBeforeMount(async () => {
+  if (!user.value?.isEmailVerified) {
+    return await navigateTo("/auth/verify-email");
+  }
+  await navigateTo("/dashboard");
+});
 </script>
 
 <template>

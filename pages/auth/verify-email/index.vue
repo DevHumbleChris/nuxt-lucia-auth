@@ -20,7 +20,7 @@ const { data, error, status } = await useAsyncData("isEmailVerified", () =>
 );
 onBeforeMount(async () => {
   if (data.value?.isEmailVerified) {
-    await navigateTo("/account/dashboard");
+    await navigateTo("/dashboard");
   }
 });
 </script>
