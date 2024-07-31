@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@iconify-json/devicon-plain": "^1.1.46",
+    "@iconify-json/gg": "^1.1.9",
     "@iconify-json/icon-park-outline": "^1.1.15",
     "@iconify-json/lucide": "^1.1.203",
     "@iconify-json/simple-icons": "^1.1.111",
