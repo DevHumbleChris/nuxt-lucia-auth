@@ -7,9 +7,11 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
+    "@lucia-auth/adapter-drizzle": "^1.0.7",
     "@nuxt/icon": "^1.4.0",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/google-fonts": "^3.2.0",
@@ -18,8 +20,14 @@
     "@vueuse/core": "^10.11.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.32.1",
+    "lucia": "^3.2.0",
     "lucide-vue-next": "^0.417.0",
+    "nodemailer": "^6.9.14",
     "nuxt": "^3.12.4",
+    "oslo": "^1.2.1",
+    "postgres": "^3.4.4",
     "radix-vue": "^1.9.2",
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.4.0",
@@ -37,6 +45,8 @@
     "@iconify-json/vscode-icons": "^1.1.36",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/tailwindcss": "^6.12.1",
+    "@types/nodemailer": "^6.4.15",
+    "drizzle-kit": "^0.23.1",
     "typescript": "^5.5.4"
   },
   "overrides": {
