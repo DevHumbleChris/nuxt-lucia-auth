@@ -13,6 +13,10 @@ definePageMeta({
   layout: "auth",
 });
 
+useHead({
+  titleTemplate: "%s - Signup",
+});
+
 const user = useUser();
 
 onBeforeMount(async () => {

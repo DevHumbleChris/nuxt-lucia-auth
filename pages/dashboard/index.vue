@@ -4,6 +4,10 @@ definePageMeta({
   middleware: ["protected"],
 });
 
+useHead({
+  titleTemplate: "%s - Dashboard",
+});
+
 import { File, ListFilter, MoreHorizontal, PlusCircle } from "lucide-vue-next";
 
 import { Badge } from "@/components/ui/badge";

@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxtjs/color-mode",
     "@nuxtjs/svg-sprite",
+    "nuxt-og-image"
   ],
   shadcn: {
     /**
@@ -43,5 +44,9 @@ export default defineNuxtConfig({
     classPrefix: "",
     classSuffix: "",
     storageKey: "nuxt-color-mode-admin",
+  },
+  site: {
+    // production URL
+    url: process.env.BASE_URL,
   },
 });

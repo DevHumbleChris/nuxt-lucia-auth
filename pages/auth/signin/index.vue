@@ -14,6 +14,10 @@ definePageMeta({
   layout: "auth",
 });
 
+useHead({
+  titleTemplate: "%s - Signin",
+});
+
 const user = useUser();
 
 onBeforeMount(async () => {

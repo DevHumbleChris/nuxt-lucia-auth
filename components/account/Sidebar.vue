@@ -94,33 +94,28 @@ const isExpandView = ref(false);
         )
       "
     >
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger as-child>
-            <a
-              href="#"
-              :class="
-                cn(
-                  'flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors md:h-8 md:w-8',
-                  isExpandView && 'justify-start text-foreground gap-3 w-full'
-                )
-              "
-            >
-              <Settings class="size-5 flex-shrink-0" />
-              <span
-                :class="
-                  cn(
-                    isExpandView ? 'block' : 'hidden',
-                    'transiton-all duration-500 ease-in-out'
-                  )
-                "
-                >Settings</span
-              >
-            </a>
-          </TooltipTrigger>
-          <TooltipContent side="right"> Settings </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <ActionTooltip name="Settings">
+        <a
+          href="#"
+          :class="
+            cn(
+              'flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors md:h-8 md:w-8',
+              isExpandView && 'justify-start text-foreground gap-3 w-full'
+            )
+          "
+        >
+          <Settings class="size-5 flex-shrink-0" />
+          <span
+            :class="
+              cn(
+                isExpandView ? 'block' : 'hidden',
+                'transiton-all duration-500 ease-in-out'
+              )
+            "
+            >Settings</span
+          >
+        </a>
+      </ActionTooltip>
     </nav>
   </aside>
 </template>

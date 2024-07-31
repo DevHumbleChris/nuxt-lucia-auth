@@ -14,6 +14,10 @@ definePageMeta({
   middleware: ["protected"],
 });
 
+useHead({
+  titleTemplate: "%s - Verify Email",
+});
+
 const user = useAuthenticatedUser();
 const { data, error, status } = await useAsyncData("isEmailVerified", () =>
   $fetch(`/api/auth/${user.value.email}/check-verification`)
