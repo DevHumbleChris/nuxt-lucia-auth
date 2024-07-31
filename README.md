@@ -49,6 +49,13 @@ BASE_URL =**********
 
 GMAIL_EMAIL_USER =**********
 GMAIL_EMAIL_PASSWORD = **********
+
+OAUTH_GITHUB_CLIENT_ID = **********
+OAUTH_GITHUB_CLIENT_SECRET = **********
+
+OAUTH_GOOGLE_CLIENT_ID = **********
+OAUTH_GOOGLE_CLIENT_SECRET = **********
+OAUTH_GOOGLE_REDIRECT_URI = **********
 ```
 
 ## Roadmap

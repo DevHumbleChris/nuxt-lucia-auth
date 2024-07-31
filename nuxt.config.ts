@@ -59,4 +59,11 @@ export default defineNuxtConfig({
       sameSite: "strict",
     },
   },
+  runtimeConfig: {
+    public: {
+      googleClientId: process.env.OAUTH_GOOGLE_CLIENT_ID,
+      googleClientSecret: process.env.OAUTH_GOOGLE_CLIENT_SECRET,
+      googleRedirectURI: process.env.OAUTH_GOOGLE_REDIRECT_URI,
+    },
+  },
 });

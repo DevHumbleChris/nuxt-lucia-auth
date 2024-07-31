@@ -1,5 +1,8 @@
 import { Lucia } from "lucia";
 import adapter from "./adapter";
+import { GitHub, Google } from "arctic";
+
+const config = useRuntimeConfig();
 
 export const lucia = new Lucia(adapter, {
   sessionCookie: {
@@ -31,3 +34,14 @@ interface DatabaseUser {
   id: string;
   isEmailVerified: string;
 }
+
+export const github = new GitHub(
+  config.githubClientId,
+  config.githubClientSecret
+);
+
+export const google = new Google(
+  config.public.googleClientId,
+  config.public.googleClientSecret,
+  config.public.googleRedirectURI
+);

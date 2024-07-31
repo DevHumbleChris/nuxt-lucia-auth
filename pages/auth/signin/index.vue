@@ -40,16 +40,16 @@ onBeforeMount(async () => {
     <CardContent>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Button variant="outline" class="w-full" asChild>
-          <NuxtLink to="/login/discord">
+          <a href="/api/oauth/google">
             <Icon name="tabler:brand-google" class="mr-2 size-5" />
             Sign up with Google
-          </NuxtLink>
+          </a>
         </Button>
         <Button variant="outline" class="w-full" asChild>
-          <NuxtLink to="/login/discord">
+          <a href="/api/oauth/github">
             <Icon name="tabler:brand-github" class="mr-2 size-5" />
             Sign up with Github
-          </NuxtLink>
+          </a>
         </Button>
       </div>
       <div class="my-2 flex items-center">

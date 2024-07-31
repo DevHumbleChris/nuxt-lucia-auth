@@ -7,12 +7,10 @@ export const userTable = pgTable(
     id: text("id").primaryKey(),
     email: text("email").notNull().unique(),
     password: text("hashed_password"),
-    googleId: text("google_id").unique(),
-    githubId: text("github_id").unique(),
     isEmailVerified: boolean("is_email_verified").notNull().default(false),
   },
   (table) => ({
-    index: [table.email, table.githubId, table.googleId],
+    index: [table.email],
   })
 );
 
@@ -51,6 +49,21 @@ export const passwordResetTable = pgTable(
     index: [table.userId, table.code],
   })
 );
+
+export const oauthAccountTable = pgTable("oauth_account", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => userTable.id),
+  provider: text("provider").notNull(),
+  providerUserId: text("provider_user_id").notNull(),
+  accessToken: text("access_token").notNull(),
+  refreshToken: text("refresh_token"),
+  expiresAt: timestamp("expires_at", {
+    withTimezone: true,
+    mode: "date",
+  }).notNull(),
+});
 
 export const sessionTable = pgTable(
   "session",
