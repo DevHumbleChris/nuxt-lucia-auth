@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import PasswordInput from "~/components/PasswordInput.vue";
+import SignupForm from "~/components/auth/signup/SignupForm.vue";
 
 definePageMeta({
   layout: "auth",
@@ -22,7 +21,7 @@ definePageMeta({
       <CardDescription>Sign up to start using the app</CardDescription>
     </CardHeader>
     <CardContent>
-      <div class="grid gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Button variant="outline" class="w-full" asChild>
           <NuxtLink to="/login/discord">
             <Icon name="tabler:brand-google" class="mr-2 size-5" />
@@ -41,43 +40,7 @@ definePageMeta({
         <div class="mx-2 text-muted-foreground">or</div>
         <div class="flex-grow border-t border-muted" />
       </div>
-      <form class="grid gap-4">
-        <div class="space-y-2">
-          <Label for="email">Email</Label>
-          <Input
-            required
-            id="email"
-            placeholder="email@example.com"
-            autoComplete="email"
-            name="email"
-            type="email"
-          />
-        </div>
-
-        <div class="space-y-2">
-          <Label for="password">Password</Label>
-          <PasswordInput
-            id="password"
-            name="password"
-            required
-            autoComplete="current-password"
-            placeholder="********"
-            :disabled="false"
-          />
-        </div>
-
-        <div class="flex flex-wrap justify-between">
-          <Button variant="link" size="sm" class="p-0">
-            <NuxtLink to="/auth/signin"
-              >Already signed up? Signin instead.</NuxtLink
-            >
-          </Button>
-        </div>
-        <Button class="w-full" aria-label="submit-btn"> Signup </Button>
-        <Button variant="outline" class="w-full" asChild>
-          <NuxtLink to="/">Cancel</NuxtLink>
-        </Button>
-      </form>
+      <SignupForm />
     </CardContent>
   </Card>
 </template>

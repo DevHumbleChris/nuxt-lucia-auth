@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { cn } from "~/lib/utils";
 import { Input } from "./ui/input";
+import type { ComponentFieldBindingObject } from "vee-validate";
 
 const props = defineProps<{
   class?: string;
   disabled: boolean;
+  componentField: ComponentFieldBindingObject<any>;
 }>();
 
 const showPassword = ref(false);
@@ -15,8 +17,9 @@ const showPassword = ref(false);
     <Input
       :type="showPassword ? 'text' : 'password'"
       :class="cn('pr-10', props?.class)"
-      ref="{ref}"
-      {...props}
+      placeholder="********"
+      :disabled="props?.disabled"
+      v-bind="props?.componentField"
     />
     <Button
       type="button"

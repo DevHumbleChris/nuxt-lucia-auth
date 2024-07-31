@@ -1,3 +1,6 @@
+import { toTypedSchema } from "@vee-validate/zod";
+import * as z from "zod";
+
 export const features = [
   {
     name: "Nuxt.js",
@@ -50,3 +53,22 @@ export const routes = [
 export const githubUrl =
   "https://github.com/DevHumbleChris/nuxt-lucia-auth.git";
 export const twitterUrl = "https://x.com/AmChrisKE";
+
+export const signupSchema = toTypedSchema(
+  z.object({
+    email: z.string().email({
+      message: "Invalid email!",
+    }),
+    password: z.string().min(8, {
+      message: "Password must be atleast 8 characters long!",
+    }),
+  })
+);
+
+export const verifySchema = toTypedSchema(
+  z.object({
+    code: z.string().min(8, {
+      message: "Code must be atleast 8 characters long!",
+    }),
+  })
+);

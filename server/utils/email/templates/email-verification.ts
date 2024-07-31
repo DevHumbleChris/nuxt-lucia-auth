@@ -2,9 +2,9 @@ export const emailVerificationTemplate = (code: string) => `
 <div>
     <h1>Hello 👋,</h1>
     <p>
-        Thank you for registering for an account on Nuxt Lucia Auth. To complete your registration, please verify your your account by using the following code:
+        Thank you for registering for an account on Nuxt Lucia Auth. To complete your registration, please verify your account by using the following code:
     </p>
-    <p style="background: 'gray'; padding: 5px; border: 1px solid gray">
+    <p style="color: blue">
         Code: ${code}
     </p>
     <p>
