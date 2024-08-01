@@ -73,6 +73,14 @@ export const resetPasswordCodeSchema = toTypedSchema(
   })
 );
 
+export const magicLinkRequestSchema = toTypedSchema(
+  z.object({
+    email: z.string().email({
+      message: "Invalid email!",
+    }),
+  })
+);
+
 export const resetPasswordSchema = toTypedSchema(
   z.object({
     password: z.string().min(8, {
@@ -97,4 +105,4 @@ export interface ModalStore {
   isOpen: boolean;
 }
 
-export type ModalType = "signoutUser";
+export type ModalType = "signoutUser" | "magicLinkRequest";

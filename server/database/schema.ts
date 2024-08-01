@@ -7,7 +7,7 @@ export const userTable = pgTable(
     id: text("id").primaryKey(),
     email: text("email").unique(),
     password: text("hashed_password"),
-    isEmailVerified: boolean("is_email_verified").notNull().default(false),
+    isEmailVerified: boolean("is_email_verified").default(false),
     profilePictureUrl: text("profile_picture_url"),
     name: text("name"),
   },
@@ -49,6 +49,23 @@ export const passwordResetTable = pgTable(
   },
   (table) => ({
     index: [table.userId, table.code],
+  })
+);
+
+export const magicLinkTable = pgTable(
+  "magic_link",
+  {
+    id: text("id").primaryKey(),
+    userId: text("userId")
+      .notNull()
+      .references(() => userTable.id),
+    expiresAt: timestamp("expires_at", {
+      withTimezone: true,
+      mode: "date",
+    }).notNull(),
+  },
+  (table) => ({
+    index: [table.userId],
   })
 );
 

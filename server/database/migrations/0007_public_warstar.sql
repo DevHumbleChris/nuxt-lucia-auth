@@ -1,0 +1,1 @@
+ALTER TABLE "magic_link" DROP COLUMN IF EXISTS "code";

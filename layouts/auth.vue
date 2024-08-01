@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Toaster } from "@/components/ui/sonner";
+import AuthModalProvider from "~/providers/AuthModalProvider.vue";
 
 useHead({
   meta: [
@@ -41,5 +42,6 @@ defineOgImageComponent("NuxtSeo", {
       <slot />
     </div>
     <Toaster :close-button="true" />
+    <AuthModalProvider />
   </main>
 </template>

@@ -114,7 +114,6 @@ export default defineEventHandler(async (event) => {
     );
     return sendRedirect(event, "/dashboard");
   } catch (e) {
-    console.log(e);
     if (
       e instanceof OAuth2RequestError &&
       e.message === "bad_verification_code"

@@ -9,10 +9,10 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxt/icon",
     "@nuxtjs/color-mode",
-    "@nuxtjs/svg-sprite",
     "nuxt-og-image",
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
+    "@nuxtjs/svg-sprite",
   ],
   shadcn: {
     /**

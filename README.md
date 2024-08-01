@@ -62,7 +62,7 @@ OAUTH_GOOGLE_REDIRECT_URI = **********
 
 - [x] Email/password auth with verification.
 - [x] Sign in with OAuth providers (GitHub/Google).
-- [ ] Sign in using Magic link.
+- [ ] Sign in using Magic link. (under consideration)
 - [ ] Role-Based Access Policy (under consideration)
 - [ ] Admin Dashboard (under consideration)
 

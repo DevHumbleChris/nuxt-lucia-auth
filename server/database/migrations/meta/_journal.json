@@ -43,6 +43,34 @@
       "when": 1722450236530,
       "tag": "0005_friendly_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1722494206984,
+      "tag": "0006_square_the_hunter",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1722497527122,
+      "tag": "0007_public_warstar",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1722506029995,
+      "tag": "0008_thankful_galactus",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1722507660835,
+      "tag": "0009_tough_scrambler",
+      "breakpoints": true
     }
   ]
 }

@@ -46,6 +46,11 @@ export default defineEventHandler(async (event) => {
           message: `${email} was first used in sign in with '${checkUserSignedWithOauth.provider}', signin again and set your password.`,
           statusCode: 400,
         });
+      } else {
+        throw createError({
+          message: `${email} was first used in sign in with Magic Link, signin again and set your password.`,
+          statusCode: 400,
+        });
       }
     }
 
@@ -62,12 +67,15 @@ export default defineEventHandler(async (event) => {
     }
 
     const session = await lucia.createSession(user?.id, {});
+    // appendHeader(
+    //   event,
+    //   "Set-Cookie",
+    //   lucia.createSessionCookie(session.id).serialize()
+    // );
 
-    appendHeader(
-      event,
-      "Set-Cookie",
-      lucia.createSessionCookie(session.id).serialize()
-    );
+    const token = lucia.createSessionCookie(session.id);
+
+    setCookie(event, token.name, token.value, token.attributes);
 
     return {
       message: "Signin successfull!",
