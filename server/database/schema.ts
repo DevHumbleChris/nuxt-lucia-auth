@@ -5,9 +5,11 @@ export const userTable = pgTable(
   "user",
   {
     id: text("id").primaryKey(),
-    email: text("email").notNull().unique(),
+    email: text("email").unique(),
     password: text("hashed_password"),
     isEmailVerified: boolean("is_email_verified").notNull().default(false),
+    profilePictureUrl: text("profile_picture_url"),
+    name: text("name"),
   },
   (table) => ({
     index: [table.email],
@@ -62,7 +64,7 @@ export const oauthAccountTable = pgTable("oauth_account", {
   expiresAt: timestamp("expires_at", {
     withTimezone: true,
     mode: "date",
-  }).notNull(),
+  }),
 });
 
 export const sessionTable = pgTable(

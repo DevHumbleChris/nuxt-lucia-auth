@@ -22,6 +22,27 @@
       "when": 1722442651010,
       "tag": "0002_wealthy_omega_sentinel",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1722447419219,
+      "tag": "0003_powerful_victor_mancha",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1722450022137,
+      "tag": "0004_kind_proemial_gods",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1722450236530,
+      "tag": "0005_friendly_storm",
+      "breakpoints": true
     }
   ]
 }

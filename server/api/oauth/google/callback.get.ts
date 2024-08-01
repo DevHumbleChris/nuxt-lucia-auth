@@ -38,11 +38,11 @@ export default defineEventHandler(async (event) => {
     });
 
     if (isEmailIsUsed) {
-      if (!isEmailIsUsed.isEmailVerified) {
-        await useDrizzle().update(tables.userTable).set({
-          isEmailVerified: googleUser.verified_email,
-        });
-      }
+      await useDrizzle().update(tables.userTable).set({
+        isEmailVerified: googleUser.verified_email,
+        name: googleUser.name,
+        profilePictureUrl: googleUser.picture,
+      });
 
       const oauthId = generateId(15);
 
@@ -66,9 +66,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const existingUser = await useDrizzle().query.userTable.findFirst({
-      where:
-        eq(tables.userTable.id, googleUser.sub) ||
-        (tables.userTable.email, googleUser.email),
+      where: eq(tables.userTable.email, googleUser.email),
     });
 
     if (existingUser) {
@@ -89,6 +87,8 @@ export default defineEventHandler(async (event) => {
         email: googleUser.email,
         id: userId,
         isEmailVerified: googleUser.verified_email,
+        name: googleUser.name,
+        profilePictureUrl: googleUser.picture,
       })
       .onConflictDoUpdate({
         target: tables.userTable.email,

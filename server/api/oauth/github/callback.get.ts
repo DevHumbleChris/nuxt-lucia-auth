@@ -23,8 +23,41 @@ export default defineEventHandler(async (event) => {
 
     const githubUser: GitHubUser = await githubUserResponse.json();
 
+    // check if email is already used
+    if (githubUser.email) {
+      const isEmailIsUsed = await useDrizzle().query.userTable.findFirst({
+        where: eq(tables.userTable.email, githubUser.email),
+      });
+
+      if (isEmailIsUsed) {
+        await useDrizzle().update(tables.userTable).set({
+          isEmailVerified: true,
+          name: githubUser.login,
+          profilePictureUrl: githubUser.avatar_url,
+        });
+
+        const oauthId = generateId(15);
+
+        await useDrizzle().insert(tables.oauthAccountTable).values({
+          id: oauthId,
+          userId: isEmailIsUsed.id,
+          provider: "github",
+          providerUserId: githubUser.id.toString(),
+          accessToken: tokens.accessToken,
+        });
+
+        const session = await lucia.createSession(isEmailIsUsed.id, {});
+        appendHeader(
+          event,
+          "Set-Cookie",
+          lucia.createSessionCookie(session.id).serialize()
+        );
+        return sendRedirect(event, "/dashboard");
+      }
+    }
+
     const existingUser = await useDrizzle().query.userTable.findFirst({
-      where: (table) => eq(table.githubId, githubUser.id.toString()),
+      where: eq(tables.userTable.id, githubUser.id.toString()),
     });
 
     if (existingUser) {
@@ -37,16 +70,26 @@ export default defineEventHandler(async (event) => {
       return sendRedirect(event, "/dashboard");
     }
 
-    const userId = generateId(15);
+    await useDrizzle()
+      .insert(tables.userTable)
+      .values({
+        email: githubUser.email ? githubUser.email : "",
+        id: githubUser.id.toString(),
+        isEmailVerified: true,
+        name: githubUser.login,
+        profilePictureUrl: githubUser.avatar_url,
+      });
 
-    await useDrizzle().insert(tables.userTable).values({
-      email: githubUser.email,
-      id: userId,
-      isEmailVerified: true,
-      githubId: githubUser.id.toString(),
+    const oauthId = generateId(15);
+    await useDrizzle().insert(tables.oauthAccountTable).values({
+      id: oauthId,
+      userId: githubUser.id.toString(),
+      provider: "github",
+      providerUserId: githubUser.id.toString(),
+      accessToken: tokens.accessToken,
     });
 
-    const session = await lucia.createSession(userId, {});
+    const session = await lucia.createSession(githubUser.id.toString(), {});
     appendHeader(
       event,
       "Set-Cookie",
@@ -54,6 +97,7 @@ export default defineEventHandler(async (event) => {
     );
     return sendRedirect(event, "/dashboard");
   } catch (e) {
+    console.log(e);
     if (
       e instanceof OAuth2RequestError &&
       e.message === "bad_verification_code"
@@ -72,6 +116,7 @@ export default defineEventHandler(async (event) => {
 interface GitHubUser {
   id: number;
   login: string;
-  email: string;
+  email: string | null;
   avatar_url: string;
+  node_id: string;
 }

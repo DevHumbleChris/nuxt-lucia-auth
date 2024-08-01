@@ -61,7 +61,7 @@ OAUTH_GOOGLE_REDIRECT_URI = **********
 ## Roadmap
 
 - [x] Email/password auth with verification.
-- [ ] Sign in with OAuth providers (GitHub/Google).
+- [x] Sign in with OAuth providers (GitHub/Google).
 - [ ] Sign in using Magic link.
 - [ ] Role-Based Access Policy (under consideration)
 - [ ] Admin Dashboard (under consideration)

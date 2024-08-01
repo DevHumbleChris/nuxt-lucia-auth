@@ -9,6 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { CircleUser } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+const user = useAuthenticatedUser();
 
 const modalStore = useModalStore();
 
@@ -22,7 +25,11 @@ const onUserSignout = () => {
   <DropdownMenu>
     <DropdownMenuTrigger as-child>
       <Button variant="secondary" size="icon" class="rounded-full">
-        <CircleUser class="h-5 w-5" />
+        <Avatar class="size-8" v-if="user.profilePictureUrl">
+          <AvatarImage :src="user.profilePictureUrl" :alt="user.name" />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <CircleUser v-else class="h-5 w-5" />
         <span class="sr-only">Toggle user menu</span>
       </Button>
     </DropdownMenuTrigger>

@@ -36,6 +36,19 @@ export default defineEventHandler(async (event) => {
       });
     }
 
+    if (!user.password) {
+      const checkUserSignedWithOauth =
+        await useDrizzle().query.oauthAccountTable.findFirst({
+          where: (table) => eq(table.userId, user.id),
+        });
+      if (checkUserSignedWithOauth) {
+        throw createError({
+          message: `${email} was first used in sign in with '${checkUserSignedWithOauth.provider}', signin again and set your password.`,
+          statusCode: 400,
+        });
+      }
+    }
+
     const validPassword = await new Argon2id().verify(
       user.password as string,
       password

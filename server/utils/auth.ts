@@ -17,6 +17,8 @@ export const lucia = new Lucia(adapter, {
       email: attributes.email,
       id: attributes.id,
       isEmailVerified: attributes.isEmailVerified,
+      profilePictureUrl: attributes.profilePictureUrl,
+      name: attributes.name,
     };
   },
 });
@@ -33,11 +35,13 @@ interface DatabaseUser {
   email: string;
   id: string;
   isEmailVerified: string;
+  profilePictureUrl: string;
+  name: string;
 }
 
 export const github = new GitHub(
-  config.githubClientId,
-  config.githubClientSecret
+  config.public.githubClientId,
+  config.public.githubClientSecret
 );
 
 export const google = new Google(
