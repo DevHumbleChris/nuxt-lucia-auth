@@ -16,6 +16,14 @@ export const userTable = pgTable(
   })
 );
 
+export const cronJobTable = pgTable("cron_jobs", {
+  id: text("id").notNull(),
+  createdAt: timestamp("create_at", {
+    withTimezone: true,
+    mode: "date",
+  }).defaultNow(),
+});
+
 export const emailVerificationTable = pgTable(
   "email_verification",
   {

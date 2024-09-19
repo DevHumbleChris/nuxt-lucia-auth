@@ -71,6 +71,13 @@
       "when": 1722507660835,
       "tag": "0009_tough_scrambler",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1726731648375,
+      "tag": "0010_moaning_santa_claus",
+      "breakpoints": true
     }
   ]
 }
